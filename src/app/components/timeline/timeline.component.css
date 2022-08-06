@@ -1,0 +1,10 @@
+.scroll-container {
+  width: 75%;
+
+  overflow-y: hidden;
+
+  position: relative;
+  overflow-x: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -1,9 +1,62 @@
 <div class="container-fluid">
-  <div class="row text-center">
-    <h3>TiMe!</h3>
+  <div class="row text-center justify-content-center">
+    <h1><strong>TiMe!</strong></h1>
 
     <div class="scroll-container" [style.height]="altezza + 'px'">
       <div id="timesheet"></div>
     </div>
   </div>
+  <div class="row text-center">
+    <div class="col">
+      <ng-container *ngIf="message">
+        {{ message }}
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row text-center">
+    <form [formGroup]="timelineForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col mt-2">
+          <label for="start">Start year</label>
+          <input id="start" type="month" formControlName="start" />
+        </div>
+        <div class="col mt-2">
+          <label for="end">End year</label>
+          <input id="end" type="month" formControlName="end" />
+        </div>
+        <div class="col mt-2">
+          <label for="label">Label</label>
+          <input id="label" type="text" formControlName="label" />
+        </div>
+      </div>
+
+      <button class="button mt-2" type="submit">Add time-line</button>
+    </form>
+  </div>
+
+  <ng-container *ngIf="!message">
+    <h3 class="mt-5 text-center"><strong>Your timeline data:</strong></h3>
+    <ng-container *ngFor="let line of data; let index = index">
+      <div class="row justify-content-between">
+        <div class="col">
+          <strong>Line {{ index }}</strong> <br />
+          <span
+            >Start: {{ line[0] }} <br />
+            End: {{ line[1] }} <br />
+            Label: {{ line[2] }} <br />
+            Category: {{ line[3] }}</span
+          >
+        </div>
+        <div class="col-3">
+          <button class="button" (click)="editLine(index)">Edit</button>
+
+          <button class="button" (click)="deleteLine(index)">Delete</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
 </div>

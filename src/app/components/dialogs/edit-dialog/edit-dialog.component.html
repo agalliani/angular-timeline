@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="row">
+    <form [formGroup]="timelineEditForm" (ngSubmit)="onSubmit()">
+      <label for="start">Start year</label>
+      <input id="start" type="month" formControlName="start" />
+
+      <label for="end">End year</label>
+      <input id="end" type="month" formControlName="end" />
+
+      <label for="label">Label</label>
+      <input id="label" type="text" formControlName="label" />
+
+      <button class="button" type="submit">Edit time-line</button>
+    </form>
+  </div>
+</div>

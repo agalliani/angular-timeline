@@ -1,3 +1,4 @@
+import { start } from "@popperjs/core";
 import Bubble from "./Bubble";
 
 
@@ -12,22 +13,12 @@ export default class Timesheet {
 
   constructor(containerElement: any, min: number, max: number, data: any) {
     this.data = [];
-
     this.year = { min: min, max: max }
-
-
-
     this.parse(data || []);
-
-
     this.containerElement = containerElement
     this.drawSections();
-
     this.insertData();
-
   }
-
-
 
   parse(data: any[]) {
     for (let n = 0, m = data.length; n < m; n++) {
@@ -36,9 +27,8 @@ export default class Timesheet {
       const lbl = data[n].length === 4 ? data[n][2] : data[n][1];
       const cat = data[n].length === 4 ? data[n][3] : data[n].length === 3 ? data[n][2] : 'default';
 
-
       if (begin.date.getFullYear() < this.year.min) {
-        this.year.min = begin.date.getFullYear() - 1;
+        this.year.min = begin.date.getFullYear();
       }
 
       if (end && end.date.getFullYear() > this.year.max) {
@@ -104,50 +94,51 @@ export default class Timesheet {
   drawSections() {
     const html = []
 
-    for (let c = this.year.min; c <= this.year.max; c++) {
+    for (let c = this.year.min; c <= this.year.max + 2; c++) {
       html.push('<section>' + c + '</section>');
     }
-
     this.containerElement.className = 'timesheet color-scheme-default';
-
-
-
-
-
     this.containerElement.innerHTML = '<div class="scale">' + html.join('') + '</div>'
-
-
   }
 
   insertData() {
     const html: string[] = [];
-
-
     const widthMonth = this.containerElement?.querySelector('.scale section')?.offsetWidth;
 
+    let widthFlag: number = 0;
     for (let n = 0, m = this.data.length; n < m; n++) {
       const cur = this.data[n];
+      console.log(n, cur)
       const bubble = this.createBubble(widthMonth, this.year.min, cur.start, cur.end);
-
+      widthFlag = bubble.getStartOffset()
       const line = [
-        '<span style="margin-left: ' + bubble.getStartOffset() + 'px; width: ' + bubble.getWidth() + 'px;" class="bubble bubble-' + (cur.type || 'default') + '" data-duration="' + (cur.end ? Math.round((cur.end - cur.start) / 1000 / 60 / 60 / 24 / 39) : '') + '"></span>',
-        '<span class="date">' + bubble.getDateLabel() + '</span> ',
-        '<span class="label">' + cur.label + '</span>'
-      ].join('');
+        '<span style="margin-left: '
+        + bubble.getStartOffset()
+        + 'px; width: ' + bubble.getWidth()
+        + 'px;" class="bubble bubble-'
+        + (cur.type || 'default') + '" data-duration="'
+        + (cur.end ? Math.round((cur.end - cur.start) / 1000 / 60 / 60 / 24 / 39) : '')
+        + '"><span class="date">' + bubble.getDateLabel()
+        + '</span> <span class="label">' + cur.label + '</span></span>'];
+
+
 
       html.push('<li>' + line + '</li>');
     }
 
-    html.push('<li>' + [
-      '<span style="margin-left: ' + (widthMonth / 12) * (12) + 'px; width: ' + widthMonth + 'px;" class="bubble bubble-empty></span>',
-    ].join('') + '</li>')
+    const offsetStart = new Date(this.year.min, 0, -1, 1)
+    const offsetEnd = new Date(this.year.max+2, 11, -1, 1)
+    const bubble = this.createBubble(widthMonth, this.year.min, offsetStart, offsetEnd);
+
+      const offsetline = [
+        '<span style="width: ' + bubble.getWidth()
+        + 'px;" class="bubble bubble-empty"></span>'];
+
+      html.push('<li>' + offsetline + '</li>');
+
 
 
     this.containerElement.innerHTML += '<ul class="data">' + html.join('') + '</ul>';
-
-
-
-
   }
   createBubble(wMonth: any, min: number, start: any, end: any) {
     return new Bubble(wMonth, min, start, end);

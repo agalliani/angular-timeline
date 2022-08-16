@@ -1,3 +1,7 @@
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+
 .timesheet {
   position: absolute;
 }
@@ -5,7 +9,8 @@
 .timesheet {
   border-top: 1px solid rgba(250, 250, 250, 0.5);
   background-color: #333333;
-  position: absolute;
+  right: 0;
+  left: 0;
 }
 
 .timesheet.color-scheme-default .bubble-empty {
@@ -58,6 +63,7 @@
   top: 0;
   left: 0;
   float: left;
+
 }
 
 .timesheet .scale section {
@@ -99,16 +105,16 @@
 }
 
 .timesheet .data li .date {
-  color: #b5b5b5;
-  font-size: 20px;
+  color: white;
+  font-size: 15px;
 }
 
 .timesheet .data li .label {
   font-weight: lighter;
-  font-size: 20px;
+  font-size: 14px;
   padding-left: 5px;
-  line-height: 21px;
-  color: #979796;
+  line-height: 14px;
+  color: white;
   white-space: nowrap;
 }
 
@@ -124,29 +130,7 @@
   opacity: 0.7;
 }
 
-#timesheet-alternative {
-  background-color: RGBA(247, 247, 247, 1);
-  border-radius: 5px;
-}
 
-#timesheet-alternative section {
-  color: RGBA(63, 68, 72, 1);
-  border-left: 1px dashed RGBA(63, 68, 72, 0.2);
-}
 
-#timesheet-alternative section:first-child {
-  border-left: 1px dashed transparent;
-}
-
-#timesheet-alternative .date {
-  display: none;
-}
-
-#timesheet-alternative .bubble {
-  margin-right: 7px;
-}
-
-#timesheet-alternative .label {
-  padding-left: 0px;
-  color: RGBA(48, 48, 48, 1);
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

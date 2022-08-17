@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref" : "/",
             "allowedCommonJsDependencies": [
               "lodash",
               "html2canvas"

@@ -1,8 +1,6 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-.form-control{
-  font-size: 1.26rem !important;
-}
+
 
 mat-icon {
   vertical-align: middle;

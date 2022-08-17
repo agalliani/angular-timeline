@@ -30,12 +30,3 @@ jobs:
           BASE_BRANCH: master
           BRANCH: gh-pages # Il branch che contiene il progetto pubblicato sulle GitHub Pages
           FOLDER: dist # Folder dove è stata eseguita la build del nostro progetto Angular
-      - name: Trigger GitHub pages rebuild
-        run: |
-          curl --fail --request POST \
-            --url https://api.github.com/repos/agalliani/${{ github.repository }}/pages/builds \
-            --header "Authorization: Bearer $ACCESS_TOKEN"
-        env:
-          # You must create a personal token with repo access as GitHub does
-          # not yet support server-to-server page builds.
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

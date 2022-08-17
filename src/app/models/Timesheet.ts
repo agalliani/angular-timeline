@@ -108,7 +108,6 @@ export default class Timesheet {
     let widthFlag: number = 0;
     for (let n = 0, m = this.data.length; n < m; n++) {
       const cur = this.data[n];
-      console.log(n, cur)
       const bubble = this.createBubble(widthMonth, this.year.min, cur.start, cur.end);
       widthFlag = bubble.getStartOffset()
       const line = [

@@ -3,7 +3,7 @@
     <h1><strong>TiMe!</strong></h1>
 
     <div class="scroll-container" [style.height]="altezza + 'px'">
-      <div id="timesheet"></div>
+      <div #timeline id="timesheet"></div>
     </div>
   </div>
   <div class="row text-center">
@@ -19,21 +19,47 @@
   <div class="row text-center">
     <form [formGroup]="timelineForm" (ngSubmit)="onSubmit()">
       <div class="row">
-        <div class="col mt-2">
+        <div class="col form-group form-control-lg">
           <label for="start">Start year</label>
-          <input id="start" type="month" formControlName="start" />
+          <input
+            id="start"
+            class="form-control"
+            type="month"
+            formControlName="start"
+          />
         </div>
-        <div class="col mt-2">
+        <div class="col form-group form-control-lg">
           <label for="end">End year</label>
-          <input id="end" type="month" formControlName="end" />
+          <input
+            id="end"
+            class="form-control"
+            type="month"
+            formControlName="end"
+          />
         </div>
-        <div class="col mt-2">
+        <div class="col form-group form-control-lg">
           <label for="label">Label</label>
-          <input id="label" type="text" formControlName="label" />
+          <input
+            id="label"
+            class="form-control"
+            type="text"
+            formControlName="label"
+            placeholder="Write a description, a title, a job..."
+          />
         </div>
       </div>
-
-      <button class="button mt-2" type="submit">Add time-line</button>
+      <div class="row">
+        <div class="col">
+          <button type="button" class="btn btn-secondary btn-lg" type="submit">
+            Add time-line
+          </button>
+        </div>
+        <div *ngIf="data.length && data.length > 0" class="col">
+          <button  type="button" class="btn btn-outline-secondary btn-lg">
+           <a #downloadLink>Save Timeline as image</a>
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 
@@ -51,9 +77,21 @@
           >
         </div>
         <div class="col-3">
-          <button class="button" (click)="editLine(index)">Edit</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="editLine(index)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
 
-          <button class="button" (click)="deleteLine(index)">Delete</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="deleteLine(index)"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
         </div>
       </div>
       <mat-divider></mat-divider>

@@ -1,16 +1,57 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container">
+  <div class="row text-center">
+    <h2>Edit time-line #{{ data.index }}</h2>
+  </div>
+  <div class="row text-center">
     <form [formGroup]="timelineEditForm" (ngSubmit)="onSubmit()">
-      <label for="start">Start year</label>
-      <input id="start" type="month" formControlName="start" />
+      <div class="col form-group form-control-lg">
+        <label for="start">Start year</label>
+        <input
+          id="start"
+          class="form-control"
+          type="month"
+          formControlName="start"
+        />
+      </div>
+      <div class="col form-group form-control-lg">
+        <label for="end">End year</label>
+        <input
+          id="end"
+          class="form-control"
+          type="month"
+          formControlName="end"
+        />
+      </div>
+      <div class="col form-group form-control-lg">
+        <label for="label">Label</label>
+        <input
+          id="label"
+          class="form-control"
+          type="text"
+          formControlName="label"
+        />
+      </div>
 
-      <label for="end">End year</label>
-      <input id="end" type="month" formControlName="end" />
-
-      <label for="label">Label</label>
-      <input id="label" type="text" formControlName="label" />
-
-      <button class="button" type="submit">Edit time-line</button>
+      <div class="row">
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg mt-3"
+            type="submit"
+          >
+            Edit time-line
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-lg mt-3"
+            (click)="close()"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </form>
   </div>
 </div>

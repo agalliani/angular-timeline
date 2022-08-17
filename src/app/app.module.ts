@@ -10,7 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditDialogComponent } from './components/dialogs/edit-dialog/edit-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 
@@ -20,9 +22,7 @@ import {MatDividerModule} from '@angular/material/divider';
     AppComponent,
     TimelineComponent,
     ATimelineComponent,
-    EditDialogComponent,
-
-  ],
+    EditDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +31,8 @@ import {MatDividerModule} from '@angular/material/divider';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatDividerModule
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

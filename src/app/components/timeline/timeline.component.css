@@ -2,13 +2,17 @@
   width: 70%;
 
   overflow-y: hidden;
-
   position: relative;
   overflow-x: auto;
+  background-color: #333333;
 
-  /*transform: translateX(-50%);*/
 }
 
 label {
   margin-right: 5px;
+}
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
 }

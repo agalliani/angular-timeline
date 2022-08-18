@@ -1,6 +1,7 @@
 <div class="container-fluid">
-  <div class="row text-center">
-    <h1 class="mt-5"><strong>TiMe!</strong></h1>
+  <div class="row text-center my-5">
+    <h1>
+      <strong>TiMe!</strong></h1>
     <div class="col">
       <strong>TiMe!</strong> Is a simple tool to make a timeline of
       <strong>your</strong> most important <strong>life</strong> events: job
@@ -8,12 +9,12 @@
       watched, university exams and so on...
     </div>
   </div>
-  <div class="row text-center justify-content-center mt-5">
+  <div class="row text-center justify-content-center mb-5">
     <div class="scroll-container" [style.height]="altezza + 'px'">
       <div #timeline id="timesheet"></div>
     </div>
   </div>
-  <div *ngIf="message" class="row text-center">
+  <div *ngIf="message" class="row text-center mb-5">
     <div class="col">
       <ng-container>
         {{ message }}

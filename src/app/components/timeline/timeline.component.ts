@@ -23,7 +23,7 @@ export class TimelineComponent implements OnInit {
   timelineForm = this.formbuilder.group({
     start: "2018-02",
     end: "2023-01",
-    label: "This is a label",
+    label: "Write a description, a title, a job...",
     category: ""
   })
 

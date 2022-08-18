@@ -19,29 +19,28 @@
   <div class="row text-center">
     <form [formGroup]="timelineForm" (ngSubmit)="onSubmit()">
       <div class="row">
-        <div class="col form-group form-control-lg">
+        <div class="col-sm-12 form-group form-control-lg">
           <label for="start">Start year</label>
           <input
             id="start"
-            class="form-control"
+
             type="month"
             formControlName="start"
           />
         </div>
-        <div class="col form-group form-control-lg">
+        <div class="col-sm-12 form-group form-control-lg">
           <label for="end">End year</label>
           <input
             id="end"
-            class="form-control"
+
             type="month"
             formControlName="end"
           />
         </div>
-        <div class="col form-group form-control-lg">
+        <div class="col-sm-12 form-group form-control-lg">
           <label for="label">Label</label>
           <input
             id="label"
-            class="form-control"
             type="text"
             formControlName="label"
             placeholder="Write a description, a title, a job..."

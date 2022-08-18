@@ -37,6 +37,7 @@ jobs:
 
 
   dockerize:
+    needs: publish-gh-pages
     runs-on: ubuntu-latest # La action verrà eseguita su l'ultima versione di Ubuntu
     steps:
     - uses: actions/checkout@v2 # first action : checkout source code

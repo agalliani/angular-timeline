@@ -10,26 +10,48 @@ env:
   REPO_NAME: ${{secrets.REPO_NAME}}
 
 jobs:
+
+  publish-gh-pages:
+  runs-on: ubuntu-latest # La action verrà eseguita su l'ultima versione di Ubuntu
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # Operazione di checkout standard utile per la CI
+        with:
+          persist-credentials: false
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1 # Setup di Node utilizzando la action https://github.com/actions/setup-node
+        with:
+          node-version: "16.x" # Nel nostro caso, utilizziamo la versione 16.x di Node
+      - name: Build
+        run:
+          | # Esecuzione dei comandi di setup e build del progetto Angular, non dimenticando il parametro --base-href nel comando di build!
+          npm install -g @angular/cli@14.0.4
+          npm install
+          npm run build:prod
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v2 # Deploy su GitHub Pages utilizzando la action https://github.com/JamesIves/github-pages-deploy-action
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # Indichiamo l'accesso token creato per essere autenticati correttamente, prelevandolo dalle Secrets
+          BASE_BRANCH: master
+          BRANCH: gh-pages # Il branch che contiene il progetto pubblicato sulle GitHub Pages
+          FOLDER: dist # Folder dove è stata eseguita la build del nostro progetto Angular
+
+
   dockerize:
     runs-on: ubuntu-latest # La action verrà eseguita su l'ultima versione di Ubuntu
     steps:
     - uses: actions/checkout@v2 # first action : checkout source code
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1
-
-    - name: Setup Docker Buildx
-      uses: docker/setup-buildx-action@v1
-
     - name: docker login
       run: | # log into docker hub account
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Get current date # get the date of the build
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d--%H-%M-%S')"
     - name: Build the Docker image # push The image to the docker hub
-      run: docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }} .
+      run: docker build --file Dockerfile --tag $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }} .
     - name: Docker Push
       run: docker push $DOCKER_USER/$REPO_NAME:${{ steps.date.outputs.date }}
+
 
 
 

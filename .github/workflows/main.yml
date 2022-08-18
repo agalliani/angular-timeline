@@ -1,11 +1,17 @@
 
 
-name: Deploy TiMe! to GitHub Pages # Il nome della Action
+name: Build TiMe! and push to gh-pages branch # Il nome della Action
 
 on:
   push:
     branches:
       - master # La action verrà eseguita in caso di push sul branch master del nostro repository
+
+
+env:
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  REPO_NAME: ${{secrets.REPO_NAME}}
 
 jobs:
   build:

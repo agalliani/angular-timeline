@@ -1,17 +1,20 @@
 <div class="container-fluid">
-  <div class="row text-center justify-content-center">
+  <div class="row text-center">
     <h1><strong>TiMe!</strong></h1>
     <div class="col">
-      <p>TiMe! Is a simple tool to make a timeline of your most important life events: job career, linkedin timeline job list, books you've read, series you've whatched, university exams and so on..</p>
-
+      <strong>TiMe!</strong> Is a simple tool to make a timeline of
+      <strong>your</strong> most important <strong>life</strong> events: job
+      career, linkedin timeline job list, books you've read, series you've
+      whatched, university exams and so on..
     </div>
-
+  </div>
+  <div class="row text-center">
     <div class="scroll-container" [style.height]="altezza + 'px'">
       <div #timeline id="timesheet"></div>
     </div>
   </div>
   <div class="row text-center">
-    <div class="col">
+    <div class="col mt-5">
       <ng-container *ngIf="message">
         {{ message }}
       </ng-container>
@@ -23,7 +26,13 @@
   <div class="row text-center">
     <form [formGroup]="timelineForm" (ngSubmit)="onSubmit()">
       <div class="row">
-        <div class="col-sm-12 form-group form-control-lg">
+        <div class="col-sm-12">
+          <mat-form-field>
+            <mat-label for="start">Start year</mat-label>
+            <input id="start" matInput type="month" formControlName="start" />
+          </mat-form-field>
+        </div>
+        <!--div class="col-sm-12 form-group form-control-lg">
           <label for="start">Start year</label>
           <input
             id="start"
@@ -31,15 +40,10 @@
             type="month"
             formControlName="start"
           />
-        </div>
+        </div-->
         <div class="col-sm-12 form-group form-control-lg">
           <label for="end">End year</label>
-          <input
-            id="end"
-
-            type="month"
-            formControlName="end"
-          />
+          <input id="end" type="month" formControlName="end" />
         </div>
         <div class="col-sm-12 form-group form-control-lg">
           <label for="label">Label</label>
@@ -58,8 +62,8 @@
           </button>
         </div>
         <div *ngIf="data.length && data.length > 0" class="col">
-          <button  type="button" class="btn btn-outline-secondary btn-lg">
-           <a #downloadLink>Save Timeline as image</a>
+          <button type="button" class="btn btn-outline-secondary btn-lg">
+            <a #downloadLink>Save Timeline as image</a>
           </button>
         </div>
       </div>

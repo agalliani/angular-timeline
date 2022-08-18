@@ -4,8 +4,8 @@
     <div class="col">
       <strong>TiMe!</strong> Is a simple tool to make a timeline of
       <strong>your</strong> most important <strong>life</strong> events: job
-      career, linkedin timeline job list, books you've read, series you've
-      whatched, university exams and so on...
+      career, books you've read, series you've
+      watched, university exams and so on...
     </div>
   </div>
   <div class="row text-center justify-content-center mt-5">
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div class="container mt-5">
+<div class="container ma-5">
   <div class="row text-center">
     <form [formGroup]="timelineForm" (ngSubmit)="onSubmit()">
       <div class="row">
@@ -81,7 +81,7 @@
             Category: {{ line[3] }}</span
           >
         </div>
-        <div class="col-3">
+        <div class="col-3 text-right">
           <button
             type="button"
             class="btn btn-outline-secondary"

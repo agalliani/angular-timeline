@@ -1,7 +1,6 @@
 # STEP 1 : build the app
 # Use official node image as the base image
-#FROM node:latest as build
-FROM arm32v7/node as build
+FROM node:latest as build
 # Set the working directory
 WORKDIR /usr/local/app
 # Add the source code to app

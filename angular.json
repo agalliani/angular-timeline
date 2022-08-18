@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": ["lodash", "html2canvas"],
-            "outputPath": "dist",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -40,7 +40,7 @@
             "optimization": false,
             "namedChunks": true,
             "aot": true,
-            "baseHref": "/timeline-me/"
+            "baseHref": ""
 
           },
           "configurations": {

@@ -7,8 +7,8 @@ const routes: Routes = [
     path: "timeline",
     component: TimelineComponent
   },
-  { path: '', redirectTo: '/timeline', pathMatch: 'full' },
-  { path: '**',   redirectTo: '/timeline', pathMatch: 'full' }
+  { path: '', redirectTo: 'timeline', pathMatch: 'full' },
+  { path: '**',   redirectTo: 'timeline', pathMatch: 'full' }
 ];
 
 @NgModule({

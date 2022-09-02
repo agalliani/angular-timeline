@@ -32,7 +32,7 @@ export class TimelineComponent implements OnInit {
 
   message: string | undefined;
 
-  @ViewChild('timeline')
+  @ViewChild('timeline',{static: true})
   timeline!: ElementRef;
   @ViewChild('downloadLink')
   downloadLink!: ElementRef;
@@ -41,6 +41,8 @@ export class TimelineComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: Document, private formbuilder: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
+    this.data = JSON.parse(localStorage.getItem('data') || '[]')
     this.drawLines();
   }
 
@@ -64,6 +66,7 @@ export class TimelineComponent implements OnInit {
 
   onSubmit() {
     this.data.push([this.timelineForm.value.start?.split("-")[1] + "/" + this.timelineForm.value.start?.split("-")[0], this.timelineForm.value.end?.split("-")[1] + "/" + this.timelineForm.value.end?.split("-")[0], this.timelineForm.value.label ?? "", this.timelineForm.value.category ?? ""])
+    localStorage.setItem('data', JSON.stringify(this.data));
     this.drawLines();
   }
 
@@ -78,6 +81,7 @@ export class TimelineComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: string[]) => {
       if (result) {
         this.data[index] = result
+        localStorage.setItem('data', JSON.stringify(this.data));
         this.drawLines()
       }
     })
@@ -86,16 +90,19 @@ export class TimelineComponent implements OnInit {
   deleteLine(index: number) {
     if (confirm(`Are you sure you want to delete the time-line #${index}?`)) {
       this.data.splice(index, 1)
+      localStorage.setItem('data', JSON.stringify(this.data));
       this.drawLines();
     }
   }
 
   saveAsImage() {
     /* Converting the html element to a canvas element and then converting it to a png image. */
-    html2canvas(this.timeline.nativeElement).then((canvas: any) => {
-      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
-      this.downloadLink.nativeElement.download = `timeline-${new Date().toJSON().replace("T", "-").slice(0, -5)}.png`;
-    });
+      html2canvas(this.timeline.nativeElement).then((canvas: any) => {
+        this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+        this.downloadLink.nativeElement.download = `timeline-${new Date().toJSON().replace("T", "-").slice(0, -5)}.png`;
+      });
+
+
   }
 
 }
